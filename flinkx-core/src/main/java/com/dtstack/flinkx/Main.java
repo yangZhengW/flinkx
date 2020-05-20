@@ -99,9 +99,10 @@ public class Main {
             flinkConf = GlobalConfiguration.loadConfiguration(options.getFlinkconf());
         }
 
-        StreamExecutionEnvironment env = (StringUtils.isNotBlank(monitor)) ?
-                StreamExecutionEnvironment.getExecutionEnvironment() :
-                new MyLocalStreamEnvironment(flinkConf);
+//        StreamExecutionEnvironment env = (StringUtils.isNotBlank(monitor)) ?
+//                StreamExecutionEnvironment.getExecutionEnvironment() :
+//                new MyLocalStreamEnvironment(flinkConf);
+        StreamExecutionEnvironment env = StreamExecutionEnvironment.createLocalEnvironment(1, flinkConf);
 
         env = openCheckpointConf(env, confProperties);
         configRestartStrategy(env, config);
